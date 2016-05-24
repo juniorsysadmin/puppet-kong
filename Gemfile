@@ -20,6 +20,7 @@ group :test do
   gem 'puppet-blacksmith',                                          :require => false, :git => 'https://github.com/voxpupuli/puppet-blacksmith.git'
   gem 'voxpupuli-release',                                          :require => false, :git => 'https://github.com/voxpupuli/voxpupuli-release-gem.git'
   gem 'rubocop', '~> 0.39',                                         :require => false
+  gem 'syck',                                                       :require => false
   gem 'rspec-puppet-utils',                                         :require => false
   gem 'puppetlabs_spec_helper',                                     :require => false
   gem 'puppet-lint-absolute_classname-check',                       :require => false
