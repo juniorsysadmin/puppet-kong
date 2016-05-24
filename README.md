@@ -51,45 +51,76 @@ If you do not want package fetching to be handled by this module:
 
 ```puppet
 class { 'kong':
-  manage_package_fetching => false,
+  manage_package_fetch => false,
 }
 ```
 
+## Versioning
+
+With the default setting of ```manage_package_fetch``` set to ```true```, the
+```version``` parameter determines what package version will attempt to be
+installed, after fetching it.
+
+The native package providers that Puppet defaults
+to using (apt, yum) do not support package installation from a package in a
+local directory. Package providers dpkg and rpm do, but they do not support
+the versionable package attribute.
+
+As a consequence, this module currently only supports new Kong installations
+or package upgrades when ```manage_package_fetch``` is set to ```true``` (Only
+new installations are supported on OSX, not upgrades).
+
+If the ability to downgrade the package version is important to you, simply
+include the Kong package in your own local repository, and set the
+```manage_package_fetch``` parameter to ```false``` - this will result in the
+native package provider being used during installation and Puppet doing the
+right thing based on the ```version``` parameter.
+
 ### Parameters
 
-#### `admin_api_listen_address`
+#### `admin_api_listen`
 
-Path to cmd.exe on Windows. Defaults to C:\Windows\system32\cmd.exe. You may
-Defaults to ```0.0.0.0```
-
-#### `admin_api_listen_port`
-
-Defaults to ```8001```
+Defaults to ```0.0.0.0:8001```
 
 #### `base_url`
 
 Defaults to ```https://downloadkong.org```
 
+#### `cassandra_consistency`
+
+Defaults to ```ONE```
+
 #### `cassandra_contact_points`
 
-Defaults to ```[ '127.0.0.1:9042' ]```
+Defaults to single contact point ```[ '127.0.0.1:9042' ]```
+
+#### `cassandra_data_centers`
+
+Used only when the replication strategy is set to
+```NetworkTopologyStrategy```.
+Variable type: Array
 
 #### `cassandra_keyspace`
 
 Defaults to ```kong```
 
-#### `cassandra_replication_strategy`
+#### `cassandra_password`
 
-Defaults to ```SimpleStrategy```
+Optional
 
 #### `cassandra_replication_factor`
 
 Used only when the replication strategy is set to ```SimpleStrategy```.
 Defaults to ```1```
 
-#### `cassandra_data_centers`
+#### `cassandra_replication_strategy`
 
-Used only when the replication strategy is set to ```NetworkTopologyStrategy```.
+Defaults to ```SimpleStrategy```
+
+#### `cassandra_ssl_certificate_authority`
+
+Absolute path to the trusted CA certificate in PEM format when
+```cassandra_ssl_verify``` is set to ```true```
 
 #### `cassandra_ssl_enabled`
 
@@ -99,50 +130,38 @@ Defaults to ```false```
 
 Defaults to ```false```
 
-#### `cassandra_ssl_certificate_authority`
-
-Absolute path to the trusted CA certificate in PEM format when ```cassandra_ssl_verify```
-is set to ```true```
-
 #### `cassandra_user`
-
-Optional
-
-#### `cassandra_password`
 
 Optional
 
 #### `cassandra_timeout`
 
-Defaults to 5000
+Connection and reading timeout (in ms). Defaults to 5000.
 
 #### `cluster_advertise`
 
-Optional
+Optional address:port used by the node to communicate with other Kong
+nodes in the cluster.
 
 #### `cluster_encrypt`
 
-Optional
+Optional key for encrypting network traffic within Kong.
 
-#### `cluster_listen_address`
+#### `cluster_listen`
 
-Defaults to ```0.0.0.0```
+Defaults to ```0.0.0.0:7946```
 
-#### `cluster_listen_port`
+#### `cluster_listen_rpc`
 
-Defaults to ```7946```
+Defaults to ```127.0.0.1:7373```
 
-#### `cluster_listen_rpc_address`
+#### `cluster_ttl_on_failure`
 
-Defaults to ```127.0.0.1```
-
-#### `cluster_listen_rpc_port`
-
-Defaults to ```7373```
+Optional override of Kong default (3600)
 
 #### `config_file_group`
 
-Defaults to ```root```
+Defaults to ```0```
 
 #### `config_file_mode`
 
@@ -158,19 +177,29 @@ Defaults to ```/etc/kong/kong.yml```
 
 #### `custom_plugins`
 
-Defaults to all plugins
+An array of additional plugins that Kong needs to load.
 
 #### `database`
 
-Defaults to ```cassandra```
+Which database to use. Options are ```cassandra``` or ```postgres```
+Defaults to ```cassandra```. Note that the database is not managed by this
+module.
 
 #### `dns_resolver`
 
 Defaults to ```dnsmasq```
 
+#### `dns_resolvers_available`
+
+A hash of DNS resolvers Kong can use. Defaults to dnsmasq, port 8053.
+
 #### `kong_path`
 
 Defaults to ```/usr/local/bin/kong```
+
+#### `manage_init_file`
+
+Defaults to ```true```
 
 #### `manage_package_dependencies`
 
@@ -180,13 +209,13 @@ Defaults to ```true```
 
 Defaults to ```true```
 
-#### `manage_init_file`
-
-Defaults to ```true```
-
 #### `memory_cache_size`
 
 Defaults to ```128```
+
+#### `nginx_conf`
+
+The nginx.conf file included in the kong.yml configuration.
 
 #### `nginx_working_dir`
 
@@ -196,21 +225,38 @@ Defaults to ```/usr/local/kong/```
 
 Defaults to ```true```
 
-#### `proxy_listen_address`
+#### `package_provider`
 
-Defaults to ```0.0.0.0```
+When ```manage_package_fetch``` is set to true, this value is used to
+determine the package manager used to install the downloaded package.
 
-#### `proxy_listen_port`
+#### `postgres_database`
 
-Defaults to ```8000```
+Defaults to ```kong```
 
-#### `proxy_listen_ssl_address`
+#### `postgres_host`
 
-Defaults to ```0.0.0.0```
+Defaults to ```127.0.0.1```
 
-#### `proxy_listen_ssl_port`
+#### `postgres_password`
 
-Defaults to ```8443```
+No default. Required if ```database``` is set to ```postgres```
+
+#### `postgres_port`
+
+Defaults to ```5432```
+
+#### `postgres_user`
+
+No default. Required if ```database``` is set to ```postgres```
+
+#### `proxy_listen`
+
+Defaults to ```0.0.0.0:8000```
+
+#### `proxy_listen_ssl`
+
+Defaults to ```0.0.0.0:8443```
 
 #### `send_anonymous_reports`
 
@@ -230,20 +276,29 @@ Defaults to ```true```
 
 #### `ssl_cert_path`
 
-Optional
+Optional path to the SSL certificate that Kong will use when listening on the
+https port
 
 #### `ssl_key_path`
 
-Optional
+Optional path to the SSL certificate key that Kong will use when listening on
+the https port
+
+#### `staging_dir`
+
+Directory where the downloaded packages are stored when
+```manage_package_fetch``` is set to ```true```
 
 #### `use_staging`
 
-Use the ```puppet/staging``` module for fetching the package rather than ```puppet/archive```.
-Defaults to ```false```
+Use the ```puppet/staging``` module for fetching the package rather than
+```puppet/archive```. Defaults to ```false```
 
 ### `version`
 
-Defaults to 0.7.0
+Determines the package version to fetch if ```manage_package_fetch``` is set
+to true. Otherwise, determines the version of Kong to install from the local
+package repository. Defaults to 0.8.3
 
 ## Limitations
 
