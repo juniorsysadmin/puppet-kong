@@ -3,16 +3,18 @@ class kong::params {
   $admin_api_listen_port               = 8001
   $base_url                            = 'https://downloadkong.org'
   $cassandra_contact_points            = [ '127.0.0.1:9042' ]
-  $cassandra_keyspace                  = 'kong'
   $cassandra_replication_strategy      = 'SimpleStrategy'
   $cassandra_replication_factor        = 1
   $cassandra_data_centers              = []
   $cassandra_ssl_enabled               = false
   $cassandra_ssl_verify                = false
   $cassandra_ssl_certificate_authority = undef
-  $cassandra_user                      = undef
-  $cassandra_password                  = undef
   $cassandra_timeout                   = 5000
+  $postgres_host                       = '127.0.0.1'
+  $postgres_port                       = 5432
+  $database_name                       = 'kong'
+  $database_user                       = undef
+  $database_password                   = undef
   $cluster_advertise                   = undef
   $cluster_encrypt                     = undef
   $cluster_listen_address              = '0.0.0.0'
@@ -24,32 +26,7 @@ class kong::params {
   $config_file_owner                   = 'root'
   $config_file_path                    = '/etc/kong/kong.yml'
   $config_file_template                = 'kong/kong.yml.erb'
-  $custom_plugins                      = [
-    'acl',
-    'basic-auth',
-    'cors',
-    'datadog',
-    'file-log',
-    'hmac-auth',
-    'http-log',
-    'ip-restriction',
-    'jwt',
-    'key-auth',
-    'loggly',
-    'log-serializers',
-    'mashap-analytics',
-    'oauth2',
-    'rate-limiting',
-    'request-size-limiting',
-    'request-transformer',
-    'response-ratelimiting',
-    'request-transformer',
-    'runscope',
-    'ssl',
-    'syslog',
-    'tcp-log',
-    'udp-log',
-  ]
+  $custom_plugins                      = []
   $database                            = 'cassandra'
   $dns_resolver                        = 'dnsmasq'
   $kong_path                           = '/usr/local/bin/kong'
@@ -73,7 +50,7 @@ class kong::params {
   $sysv_init_file_template             = 'kong/init/sysv/kong.erb'
   $upstart_init_file_template          = 'kong/init/upstart/kong.conf.erb'
   $use_staging                         = false
-  $version                             = '0.7.0'
+  $version                             = '0.8.1'
 
   case $::osfamily {
     'Debian': {

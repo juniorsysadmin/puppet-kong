@@ -4,16 +4,21 @@ class kong (
   $admin_api_listen_port               = $kong::params::admin_api_listen_port,
   $base_url                            = $kong::params::base_url,
   $cassandra_contact_points            = $kong::params::cassandra_contact_points,
-  $cassandra_keyspace                  = $kong::params::cassandra_keyspace,
+  $cassandra_keyspace                  = $kong::params::database_name,
   $cassandra_replication_strategy      = $kong::params::cassandra_replication_strategy,
   $cassandra_replication_factor        = $kong::params::cassandra_replication_factor,
   $cassandra_data_centers              = $kong::params::cassandra_data_centers,
   $cassandra_ssl_enabled               = $kong::params::cassandra_ssl_enabled,
   $cassandra_ssl_verify                = $kong::params::cassandra_ssl_verify,
   $cassandra_ssl_certificate_authority = $kong::params::cassandra_ssl_certificate_authority,
-  $cassandra_user                      = $kong::params::cassandra_user,
-  $cassandra_password                  = $kong::params::cassandra_password,
+  $cassandra_user                      = $kong::params::database_user,
+  $cassandra_password                  = $kong::params::database_password,
   $cassandra_timeout                   = $kong::params::cassandra_timeout,
+  $postgres_host                       = $kong::params::postgres_host,
+  $postgres_port                       = $kong::params::postgres_port,
+  $postgres_database                   = $kong::params::database_name,
+  $postgres_user                       = $kong::params::database_user,
+  $postgres_password                   = $kong::params::database_password,
   $cluster_advertise                   = $kong::params::cluster_advertise,
   $cluster_encrypt                     = $kong::params::cluster_encrypt,
   $cluster_listen_address              = $kong::params::cluster_listen_address,
@@ -77,6 +82,9 @@ class kong (
   validate_absolute_path($config_file_path)
   validate_array($custom_plugins)
   validate_string($database)
+  if ! ($database in [ 'cassandra', 'postgres' ]) {
+    fail('database must be cassandra or postgres')
+  }
   validate_string($dns_resolver)
   validate_absolute_path($kong_path)
   validate_bool($manage_init_file)

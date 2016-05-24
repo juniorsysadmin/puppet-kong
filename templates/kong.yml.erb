@@ -1,6 +1,14 @@
 # This file is managed by Puppet
 
 ######
+## Kong configuration file. All commented values are default values.
+## Uncomment and update a value to configure Kong to your needs.
+##
+## Lines starting with `##` are comments.
+## Lines starting with `#` are properties that can be updated.
+## Beware of YAML formatting for nested properties.
+
+######
 ## Additional plugins that this node needs to load.
 ## If you want to load custom plugins that are not supported by Kong, uncomment and update
 ## this property with the names of the plugins to load.
@@ -9,10 +17,13 @@
   # - hello_world
   # - custom_plugin2
   # - ...
+<% if @custom_plugins.any? -%>
 custom_plugins:
 <% @custom_plugins.each do |plugin| -%>
   - '<%= plugin %>'
 <% end -%>
+<% end -%>
+
 ######
 ## The Kong working directory. Equivalent to nginx's prefix path.
 ## This is where this running nginx instance will keep server files including logs.
@@ -102,19 +113,53 @@ dns_resolvers_available:
   ## Key for encrypting network traffic within Kong. Must be a base64-encoded 16-byte key.
   # encrypt: "foo"
 
+  ######
+  ## The TTL (time to live), in seconds, of a node in the cluster when it stops sending healthcheck pings, maybe
+  ## because of a failure. If the node is not able to send a new healthcheck before the expiration, then new nodes
+  ## in the cluster will stop attempting to connect to it on startup.
+  # ttl_on_failure: 3600
+
+<% if @cluster_advertise or @cluster_encrypt -%>
 cluster:
 <% if not @cluster_advertise.nil? and @cluster_advertise -%>
-  '<%= @cluster_advertise %>'
+  advertise: "<%= @cluster_advertise %>"
 <% end -%>
 <% if not @cluster_encrypt.nil? and @cluster_encrypt -%>
-  "<%= @cluster_encrypt %>"
+  encrypt: "<%= @cluster_encrypt %>"
+<% end -%>
 <% end -%>
 
 ######
-## Specify which database to use. Only "cassandra" is currently available.
+## Specify which database to use. Only "cassandra" and "postgres" are currently available.
 # database: cassandra
+database: "<%= @database -%>"
 
-database: '<%= @database -%>'
+######
+## PostgreSQL configuration
+# postgres:
+  # host: "127.0.0.1"
+  # port: 5432
+
+  ######
+  ## Name of the database used by Kong. Will be created if it does not exist.
+  # database: kong
+
+  #####
+  ## User authentication settings
+  # user: ""
+  # password: ""
+<% if @database == 'postgres' -%>
+postgres:
+  host: "<%= @postgres_host -%>"
+  port: <%= @postgres_port %>
+  database: "<%= @postgres_database -%>"
+<% if @postgres_user -%>
+  user: "<%= @postgres_user -%>"
+<% end -%>
+<% if @postgres_password -%>
+  password: "<%= @postgres_password -%>"
+<% end -%>
+<% end -%>
 
 ######
 ## Cassandra configuration (keyspace, authentication, client-to-node encryption)
@@ -123,6 +168,10 @@ database: '<%= @database -%>'
   ## Contact points to your Cassandra cluster.
   # contact_points:
   #   - "127.0.0.1:9042"
+
+  ## Port on which your cluster's peers (other than your contact_points)
+  ## are listening on.
+  # port: 9042
 
   ######
   ## Name of the keyspace used by Kong. Will be created if it does not exist.
@@ -153,6 +202,11 @@ database: '<%= @database -%>'
   #   dc2: 3
 
   #####
+  ## Consistency level to use.
+  ## See http://docs.datastax.com/en/cassandra/2.0/cassandra/dml/dml_config_consistency_c.html
+  # consistency: ONE
+
+  #####
   ## Client-to-node TLS options.
   ## `enabled`: if true, will connect to your Cassandra instance using TLS.
   ## `verify`: if true, will verify the server certificate using the given CA file.
@@ -169,6 +223,7 @@ database: '<%= @database -%>'
   # username: cassandra
   # password: cassandra
 
+<% if @database == 'cassandra' -%>
 cassandra:
   contact_points:
 <% @cassandra_contact_points.each do |contact_point| -%>
@@ -198,6 +253,7 @@ cassandra:
 <% if not @cassandra_password.nil? and @cassandra_password -%>
   password: "<%= @cassandra_password %>"
 <% end -%>
+<% end -%>
 
 ######
 ## Kong will send anonymous reports to Mashape. This helps Mashape fixing bugs/errors and improving Kong.
@@ -213,7 +269,6 @@ send_anonymous_reports: <%= @send_anonymouse_reports %>
 ## is `128`, and the potential maximum value is the total size of the datastore.
 ## This value may not be smaller than 32MB.
 # memory_cache_size: 128
-
 memory_cache_size: <%= @memory_cache_size %>
 
 ######
