@@ -59,7 +59,6 @@ class { 'kong':
 
 #### `admin_api_listen_address`
 
-Path to cmd.exe on Windows. Defaults to C:\Windows\system32\cmd.exe. You may
 Defaults to ```0.0.0.0```
 
 #### `admin_api_listen_port`
@@ -116,6 +115,26 @@ Optional
 
 Defaults to 5000
 
+#### `postgres_host`
+
+Defaults to ```127.0.0.1```
+
+#### `postgres_port`
+
+Defaults to ```5432```
+
+#### `postgres_database`
+
+Defaults tp ```kong```
+
+#### `postgres_user`
+
+Optional
+
+#### `postgres_password`
+
+Optional
+
 #### `cluster_advertise`
 
 Optional
@@ -162,7 +181,9 @@ Defaults to all plugins
 
 #### `database`
 
-Defaults to ```cassandra```
+Which database to use. Options are ```cassandra``` or ```postgres```.
+Note that the database is not managed by this module.
+Defaults to ```cassandra```.
 
 #### `dns_resolver`
 
@@ -243,7 +264,7 @@ Defaults to ```false```
 
 ### `version`
 
-Defaults to 0.7.0
+Defaults to 0.8.1
 
 ## Limitations
 
