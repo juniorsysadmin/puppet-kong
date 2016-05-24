@@ -59,7 +59,6 @@ class { 'kong':
 
 #### `admin_api_listen_address`
 
-Path to cmd.exe on Windows. Defaults to C:\Windows\system32\cmd.exe. You may
 Defaults to ```0.0.0.0```
 
 #### `admin_api_listen_port`
