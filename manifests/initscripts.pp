@@ -13,7 +13,7 @@ class kong::initscripts inherits kong {
     }
 
     $_init_script_file_path = $::service_provider ? {
-      'systemd' => '${systemd::systemd_unit_path}/kong.service',
+      'systemd' => "${systemd::systemd_unit_path}/kong.service",
       'upstart' => '/etc/init/kong.conf',
       default   => '/etc/init.d/kong',
     }
@@ -26,7 +26,7 @@ class kong::initscripts inherits kong {
     file { $_init_script_file_path:
         ensure  => file,
         content => template($_init_file_template),
-        group   => 'root',
+        group   => '0',
         mode    => $_init_script_file_mode,
         owner   => 'root',
     }

@@ -1,83 +1,63 @@
 class kong::params {
-  $admin_api_listen_address            = '0.0.0.0'
-  $admin_api_listen_port               = 8001
+  $admin_api_listen                    = '0.0.0.0:8001'
   $base_url                            = 'https://downloadkong.org'
+  $cassandra_consistency               = 'ONE'
   $cassandra_contact_points            = [ '127.0.0.1:9042' ]
-  $cassandra_keyspace                  = 'kong'
-  $cassandra_replication_strategy      = 'SimpleStrategy'
-  $cassandra_replication_factor        = 1
   $cassandra_data_centers              = []
+  $cassandra_keyspace                  = 'kong'
+  $cassandra_password                  = undef
+  $cassandra_replication_factor        = 1
+  $cassandra_replication_strategy      = 'SimpleStrategy'
+  $cassandra_ssl_certificate_authority = undef
   $cassandra_ssl_enabled               = false
   $cassandra_ssl_verify                = false
-  $cassandra_ssl_certificate_authority = undef
-  $cassandra_user                      = undef
-  $cassandra_password                  = undef
   $cassandra_timeout                   = 5000
+  $cassandra_user                      = undef
   $cluster_advertise                   = undef
   $cluster_encrypt                     = undef
-  $cluster_listen_address              = '0.0.0.0'
-  $cluster_listen_port                 = 7946
-  $cluster_listen_rpc_address          = '127.0.0.1'
-  $cluster_listen_rpc_port             = 7373
-  $config_file_group                   = 'root'
+  $cluster_listen                      = '0.0.0.0:7946'
+  $cluster_listen_rpc                  = '127.0.0.1:7373'
+  $cluster_ttl_on_failure              = undef
+  $config_file_group                   = '0'
   $config_file_mode                    = '0644'
   $config_file_owner                   = 'root'
   $config_file_path                    = '/etc/kong/kong.yml'
   $config_file_template                = 'kong/kong.yml.erb'
-  $custom_plugins                      = [
-    'acl',
-    'basic-auth',
-    'cors',
-    'datadog',
-    'file-log',
-    'hmac-auth',
-    'http-log',
-    'ip-restriction',
-    'jwt',
-    'key-auth',
-    'loggly',
-    'log-serializers',
-    'mashap-analytics',
-    'oauth2',
-    'rate-limiting',
-    'request-size-limiting',
-    'request-transformer',
-    'response-ratelimiting',
-    'request-transformer',
-    'runscope',
-    'ssl',
-    'syslog',
-    'tcp-log',
-    'udp-log',
-  ]
+  $custom_plugins                      = []
   $database                            = 'cassandra'
   $dns_resolver                        = 'dnsmasq'
+  $dns_resolvers_available             = { dnsmasq => { port => 8053 }, }
   $kong_path                           = '/usr/local/bin/kong'
+  $manage_init_file                    = true
   $manage_package_dependencies         = true
   $manage_package_fetch                = true
-  $manage_init_file                    = true
   $memory_cache_size                   = 128
   $nginx_working_dir                   = '/usr/local/kong/'
   $package_manage                      = true
-  $proxy_listen_address                = '0.0.0.0'
-  $proxy_listen_port                   = 8000
-  $proxy_listen_ssl_address            = '0.0.0.0'
-  $proxy_listen_ssl_port               = 8443
+  $postgres_database                   = 'kong'
+  $postgres_host                       = '127.0.0.1'
+  $postgres_password                   = undef
+  $postgres_port                       = 5432
+  $postgres_user                       = undef
+  $proxy_listen                        = '0.0.0.0:8000'
+  $proxy_listen_ssl                    = '0.0.0.0:8443'
   $send_anonymous_reports              = true
   $service_enable                      = true
   $service_ensure                      = 'running'
   $service_manage                      = true
   $ssl_cert_path                       = undef
   $ssl_key_path                        = undef
+  $staging_dir                         = '/opt'
   $systemd_init_file_template          = 'kong/init/systemd/kong.service.erb'
   $sysv_init_file_template             = 'kong/init/sysv/kong.erb'
   $upstart_init_file_template          = 'kong/init/upstart/kong.conf.erb'
   $use_staging                         = false
-  $version                             = '0.7.0'
+  $version                             = '0.8.3'
 
   case $::osfamily {
     'Debian': {
       $package_dependencies = ['netcat', 'openssl', 'libpcre3', 'dnsmasq', 'procps']
+      $package_provider     = 'dpkg'
       $systemd_unit_path    = '/lib/systemd/system'
       case $::operatingsystemmajrelease {
         '6': {
@@ -104,7 +84,8 @@ class kong::params {
       }
     }
     'RedHat': {
-      $package_dependencies = undef
+      $package_dependencies = []
+      $package_provider     = 'rpm'
       $systemd_unit_path    = '/usr/lib/systemd/system'
       if $::operatingsystem == 'Amazon' {
         $package_suffix = 'aws.rpm'
@@ -127,7 +108,8 @@ class kong::params {
       }
     }
     'Darwin': {
-      $package_dependencies = undef
+      $package_dependencies = []
+      $package_provider     = 'apple'
       $package_suffix       = 'osx.pkg'
     }
     default: {
