@@ -96,8 +96,7 @@ Defaults to single contact point ```[ '127.0.0.1:9042' ]```
 
 #### `cassandra_data_centers`
 
-Used only when the replication strategy is set to
-```NetworkTopologyStrategy```.
+Used only when the replication strategy is set to ```NetworkTopologyStrategy```.
 Variable type: Array
 
 #### `cassandra_keyspace`
@@ -119,8 +118,8 @@ Defaults to ```SimpleStrategy```
 
 #### `cassandra_ssl_certificate_authority`
 
-Absolute path to the trusted CA certificate in PEM format when
-```cassandra_ssl_verify``` is set to ```true```
+Absolute path to the trusted CA certificate in PEM format when ```cassandra_ssl_verify```
+is set to ```true```
 
 #### `cassandra_ssl_enabled`
 
@@ -286,13 +285,13 @@ the https port
 
 #### `staging_dir`
 
-Directory where the downloaded packages are stored when
-```manage_package_fetch``` is set to ```true```
+Directory where the downloaded packages are stored when ```manage_package_fetch```
+is set to ```true```
 
 #### `use_staging`
 
-Use the ```puppet/staging``` module for fetching the package rather than
-```puppet/archive```. Defaults to ```false```
+Use the ```puppet/staging``` module for fetching the package rather than ```puppet/archive```.
+Defaults to ```false```
 
 ### `version`
 
