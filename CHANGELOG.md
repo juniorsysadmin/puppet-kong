@@ -1,4 +1,4 @@
-## Future
+## 2016-06-05 Release 0.0.2
 
 ### Summary
 

@@ -1,6 +1,6 @@
 {
   "name": "juniorsysadmin-kong",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "juniorsysadmin",
   "summary": "Install and configure the Kong API gateway.",
   "license": "Apache-2.0",
