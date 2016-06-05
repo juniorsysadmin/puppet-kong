@@ -2,7 +2,7 @@
 
 ### Summary
 
-This release provides several bugfixes, bumps the default version to 0.8.2 and
+This release provides several bugfixes, bumps the default version to 0.8.3 and
 adds new parameters for the 0.8.x version of Kong.
 
 #### Features
