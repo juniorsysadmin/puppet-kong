@@ -29,7 +29,7 @@ class kong::install {
 
       if $kong::package_provider != 'apple' {
         $_package_ensure = latest
-      } else {    
+      } else {
         $_package_ensure = present
       }
       
