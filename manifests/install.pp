@@ -44,7 +44,8 @@ class kong::install {
     }
 
     # Install package from your local repository using the native package provider
-    package { 'kong':
+    package { 'kong:':
+      name   => 'kong',
       ensure => $kong::version,
     }
 
