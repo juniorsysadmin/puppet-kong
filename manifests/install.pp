@@ -32,7 +32,7 @@ class kong::install {
       } else {
         $_package_ensure = present
       }
-      
+
       package { 'kong':
         ensure   => $_package_ensure,
         provider => $kong::package_provider,
@@ -44,7 +44,7 @@ class kong::install {
       package { 'kong':
         ensure => $kong::version,
       }
-    }    
+    }
 
   }
 
