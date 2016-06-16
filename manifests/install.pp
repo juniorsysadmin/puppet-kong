@@ -28,24 +28,22 @@ class kong::install {
       # package provider feature but only rpm supports versionable
 
       if $kong::package_provider != 'apple' {
-        package { 'kong':
-          ensure   => latest,
-          provider => $kong::package_provider,
-          source   => "${kong::staging_dir}/kong-${kong::version}.${kong::package_suffix}",
-        }
+        $_package_ensure = latest
       } else {
-        package { 'kong':
-          ensure   => present,
-          provider => $kong::package_provider,
-          source   => "${kong::staging_dir}/kong-${kong::version}.${kong::package_suffix}",
-        }
+        $_package_ensure = present
       }
 
-    }
+      package { 'kong':
+        ensure   => $_package_ensure,
+        provider => $kong::package_provider,
+        source   => "${kong::staging_dir}/kong-${kong::version}.${kong::package_suffix}",
+      }
 
-    # Install package from your local repository using the native package provider
-    package { 'kong:':
-      ensure => $kong::version,
+    } else {
+      # Install package from your local repository using the native package provider
+      package { 'kong':
+        ensure => $kong::version,
+      }
     }
 
   }
