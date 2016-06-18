@@ -27,25 +27,23 @@ class kong::install {
       # and yum do not). Both dpkg and rpm support the upgradeable
       # package provider feature but only rpm supports versionable
 
-      if $kong::package_provider != 'apple' {
-        package { 'kong':
-          ensure   => latest,
-          provider => $kong::package_provider,
-          source   => "${kong::staging_dir}/kong-${kong::version}.${kong::package_suffix}",
-        }
-      } else {
-        package { 'kong':
-          ensure   => present,
-          provider => $kong::package_provider,
-          source   => "${kong::staging_dir}/kong-${kong::version}.${kong::package_suffix}",
-        }
+      $_package_ensure = $kong::package_provider ? {
+        'apple' => present,
+        default => latest,
       }
 
-    }
+      package { 'kong':
+        ensure   => $_package_ensure,
+        provider => $kong::package_provider,
+        source   => "${kong::staging_dir}/kong-${kong::version}.${kong::package_suffix}",
+      }
 
-    # Install package from your local repository using the native package provider
-    package { 'kong:':
-      ensure => $kong::version,
+    } else {
+
+      # Install package from your local repository using the native package provider
+      package { 'kong:':
+        ensure => $kong::version,
+      }
     }
 
   }
