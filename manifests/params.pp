@@ -21,7 +21,7 @@ class kong::params {
   $config_file_group                   = '0'
   $config_file_mode                    = '0644'
   $config_file_owner                   = 'root'
-  $config_file_path                    = '/etc/kong/kong.yml'
+  $config_file_path                    = '/etc/kong.conf'
   $config_file_template                = 'kong/kong.yml.erb'
   $custom_plugins                      = []
   $database                            = 'cassandra'

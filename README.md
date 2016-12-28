@@ -172,7 +172,7 @@ Defaults to ```root```
 
 #### `config_file_path`
 
-Defaults to ```/etc/kong/kong.yml```
+Defaults to ```/etc/kong.conf```
 
 #### `custom_plugins`
 
