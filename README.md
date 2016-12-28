@@ -200,6 +200,10 @@ Defaults to ```/usr/local/bin/kong```
 
 Defaults to ```/usr/local/kong/```
 
+#### `log_level`
+
+Defaults to ```notice```
+
 #### `manage_init_file`
 
 Defaults to ```true```

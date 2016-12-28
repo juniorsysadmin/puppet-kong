@@ -30,6 +30,7 @@ class kong (
   $dns_resolvers_available             = $kong::params::dns_resolvers_available,
   $kong_path                           = $kong::params::kong_path,
   $kong_prefix                         = $kong::params::kong_prefix,
+  $log_level                           = $kong::params::log_level,
   $manage_package_dependencies         = $kong::params::manage_package_dependencies,
   $manage_package_fetch                = $kong::params::manage_package_fetch,
   $manage_init_file                    = $kong::params::manage_init_file,
@@ -123,6 +124,7 @@ class kong (
   validate_hash($dns_resolvers_available)
   validate_absolute_path($kong_path)
   validate_absolute_path($kong_prefix)
+  validate_string($log_level)
   validate_bool($manage_init_file)
   validate_bool($manage_package_dependencies)
   validate_bool($manage_package_fetch)

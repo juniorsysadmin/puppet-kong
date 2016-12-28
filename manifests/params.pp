@@ -29,6 +29,7 @@ class kong::params {
   $dns_resolvers_available             = { dnsmasq => { port => 8053 }, }
   $kong_path                           = '/usr/local/bin/kong'
   $kong_prefix                         = '/usr/local/kong/'
+  $log_level                           = 'notice'
   $manage_init_file                    = true
   $manage_package_dependencies         = true
   $manage_package_fetch                = true
