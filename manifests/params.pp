@@ -32,6 +32,7 @@ class kong::params {
   $manage_package_dependencies         = true
   $manage_package_fetch                = true
   $memory_cache_size                   = 128
+  $nginx_conf                          = undef
   $nginx_working_dir                   = '/usr/local/kong/'
   $package_manage                      = true
   $postgres_database                   = 'kong'

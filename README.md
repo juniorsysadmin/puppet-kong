@@ -214,7 +214,8 @@ Defaults to ```128```
 
 #### `nginx_conf`
 
-The nginx.conf file included in the kong.yml configuration.
+A nginx configuration template that is compiled using the Penlight templating
+engine, and then used by Kong.
 
 #### `nginx_working_dir`
 

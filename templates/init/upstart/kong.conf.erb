@@ -6,5 +6,9 @@ start on runlevel [2345]
 stop on runlevel [!2345]
 
 script
+<%- if !@nginx_conf.nil? -%>
+	exec <%= @kong_path -%> start --conf @config_file_path --nginx-conf @nginx_conf
+<% else -%>
 	exec <%= @kong_path -%> start --conf @config_file_path
+<%- end -%>
 end script
