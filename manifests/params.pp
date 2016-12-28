@@ -56,7 +56,7 @@ class kong::params {
 
   case $::osfamily {
     'Debian': {
-      $package_dependencies = ['netcat', 'openssl', 'libpcre3', 'dnsmasq', 'procps']
+      $package_dependencies = ['netcat', 'openssl', 'libpcre3', 'dnsmasq', 'procps', 'perl']
       $package_provider     = 'dpkg'
       $systemd_unit_path    = '/lib/systemd/system'
       case $::operatingsystemmajrelease {
@@ -77,6 +77,9 @@ class kong::params {
         }
         '15.04': {
           $package_suffix = 'vivid_all.deb'
+        }
+        '16.04': {
+          $package_suffix = 'xenial_all.deb'
         }
         default: {
           fail("The ${module_name} module is not supported on an ${::operatingsystem} ${::operatingsystemrelease}.")
