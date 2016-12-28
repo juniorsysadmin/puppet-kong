@@ -196,6 +196,10 @@ A hash of DNS resolvers Kong can use. Defaults to dnsmasq, port 8053.
 
 Defaults to ```/usr/local/bin/kong```
 
+#### `kong_prefix`
+
+Defaults to ```/usr/local/kong/```
+
 #### `manage_init_file`
 
 Defaults to ```true```
@@ -216,10 +220,6 @@ Defaults to ```128```
 
 A nginx configuration template that is compiled using the Penlight templating
 engine, and then used by Kong.
-
-#### `nginx_working_dir`
-
-Defaults to ```/usr/local/kong/```
 
 #### `package_manage`
 

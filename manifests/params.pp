@@ -28,12 +28,12 @@ class kong::params {
   $dns_resolver                        = 'dnsmasq'
   $dns_resolvers_available             = { dnsmasq => { port => 8053 }, }
   $kong_path                           = '/usr/local/bin/kong'
+  $kong_prefix                         = '/usr/local/kong/'
   $manage_init_file                    = true
   $manage_package_dependencies         = true
   $manage_package_fetch                = true
   $memory_cache_size                   = 128
   $nginx_conf                          = undef
-  $nginx_working_dir                   = '/usr/local/kong/'
   $package_manage                      = true
   $postgres_database                   = 'kong'
   $postgres_host                       = '127.0.0.1'

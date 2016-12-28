@@ -29,12 +29,12 @@ class kong (
   $dns_resolver                        = $kong::params::dns_resolver,
   $dns_resolvers_available             = $kong::params::dns_resolvers_available,
   $kong_path                           = $kong::params::kong_path,
+  $kong_prefix                         = $kong::params::kong_prefix,
   $manage_package_dependencies         = $kong::params::manage_package_dependencies,
   $manage_package_fetch                = $kong::params::manage_package_fetch,
   $manage_init_file                    = $kong::params::manage_init_file,
   $memory_cache_size                   = $kong::params::memory_cache_size,
   $nginx_conf                          = $kong::params::nginx_conf,
-  $nginx_working_dir                   = $kong::params::nginx_working_dir,
   $package_dependencies                = $kong::params::package_dependencies,
   $package_manage                      = $kong::params::package_manage,
   $package_provider                    = $kong::params::package_provider,
@@ -122,11 +122,11 @@ class kong (
   validate_string($dns_resolver)
   validate_hash($dns_resolvers_available)
   validate_absolute_path($kong_path)
+  validate_absolute_path($kong_prefix)
   validate_bool($manage_init_file)
   validate_bool($manage_package_dependencies)
   validate_bool($manage_package_fetch)
   validate_integer($memory_cache_size)
-  validate_absolute_path($nginx_working_dir)
   validate_array($package_dependencies)
   validate_bool($package_manage)
   validate_integer($postgres_port)
