@@ -305,7 +305,7 @@ This module has received limited testing on:
 
 * CentOS/RHEL 5/6/7
 * Debian 6/7/8
-* Ubuntu 12.04/14.04/15.04
+* Ubuntu 12.04/14.04/15.04/16.04
 
 The following platforms should also work, but have not been tested:
 
