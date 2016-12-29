@@ -1,6 +1,6 @@
 # == Class: kong: See README.md for documentation.
 class kong (
-  $admin_api_listen                    = $kong::params::admin_api_listen,
+  $admin_listen                        = $kong::params::admin_listen,
   $anonymous_reports                   = $kong::params::anonymous_reports,
   $base_url                            = $kong::params::base_url,
   $cassandra_consistency               = $kong::params::cassandra_consistency,
@@ -62,12 +62,12 @@ class kong (
   $download_url                        = "${base_url}/${package_suffix}?version=${version}"
 ) inherits kong::params {
 
-  $_admin_api_listen_address = join(reverse(delete_at(reverse(split($admin_api_listen, ':')), 0)), ':')
-  $_admin_api_listen_array   = split($admin_api_listen, ':')
+  $_admin_api_listen_address = join(reverse(delete_at(reverse(split($admin_listen, ':')), 0)), ':')
+  $_admin_api_listen_array   = split($admin_listen, ':')
   $_admin_api_listen_port    = $_admin_api_listen_array[-1]
 
   if ! is_ip_address($_admin_api_listen_address) {
-    fail("${module_name}: ${admin_api_listen} does not contain a valid IP address.")
+    fail("${module_name}: ${admin_listen} does not contain a valid IP address.")
   }
   validate_integer($_admin_api_listen_port)
   validate_bool($anonymous_reports)

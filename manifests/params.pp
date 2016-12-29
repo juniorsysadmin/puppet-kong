@@ -1,5 +1,5 @@
 class kong::params {
-  $admin_api_listen                    = '0.0.0.0:8001'
+  $admin_listen                        = '0.0.0.0:8001'
   $anonymous_reports                   = true
   $base_url                            = 'https://downloadkong.org'
   $cassandra_consistency               = 'ONE'

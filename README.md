@@ -78,7 +78,7 @@ right thing based on the ```version``` parameter.
 
 ### Parameters
 
-#### `admin_api_listen`
+#### `admin_listen`
 
 Defaults to ```0.0.0.0:8001```
 
