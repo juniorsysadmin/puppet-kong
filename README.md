@@ -246,23 +246,23 @@ Defaults to ```true```
 When ```manage_package_fetch``` is set to true, this value is used to
 determine the package manager used to install the downloaded package.
 
-#### `postgres_database`
+#### `pg_database`
 
 Defaults to ```kong```
 
-#### `postgres_host`
+#### `pg_host`
 
 Defaults to ```127.0.0.1```
 
-#### `postgres_password`
+#### `pg_password`
 
 No default. Required if ```database``` is set to ```postgres```
 
-#### `postgres_port`
+#### `pg_port`
 
 Defaults to ```5432```
 
-#### `postgres_user`
+#### `pg_user`
 
 No default. Required if ```database``` is set to ```postgres```
 

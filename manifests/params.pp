@@ -39,11 +39,11 @@ class kong::params {
   $nginx_daemon                        = true
   $nginx_worker_processes              = 'auto'
   $package_manage                      = true
-  $postgres_database                   = 'kong'
-  $postgres_host                       = '127.0.0.1'
-  $postgres_password                   = undef
-  $postgres_port                       = 5432
-  $postgres_user                       = undef
+  $pg_database                         = 'kong'
+  $pg_host                             = '127.0.0.1'
+  $pg_password                         = undef
+  $pg_port                             = 5432
+  $pg_user                             = undef
   $proxy_listen                        = '0.0.0.0:8000'
   $proxy_listen_ssl                    = '0.0.0.0:8443'
   $service_enable                      = true

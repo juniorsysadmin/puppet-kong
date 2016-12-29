@@ -43,11 +43,11 @@ class kong (
   $package_manage                      = $kong::params::package_manage,
   $package_provider                    = $kong::params::package_provider,
   $package_suffix                      = $kong::params::package_suffix,
-  $postgres_database                   = $kong::params::postgres_database,
-  $postgres_host                       = $kong::params::postgres_host,
-  $postgres_password                   = $kong::params::postgres_password,
-  $postgres_port                       = $kong::params::postgres_port,
-  $postgres_user                       = $kong::params::postgres_user,
+  $pg_database                         = $kong::params::pg_database,
+  $pg_host                             = $kong::params::pg_host,
+  $pg_password                         = $kong::params::pg_password,
+  $pg_port                             = $kong::params::pg_port,
+  $pg_user                             = $kong::params::pg_user,
   $proxy_listen                        = $kong::params::proxy_listen,
   $proxy_listen_ssl                    = $kong::params::proxy_listen_ssl,
   $service_enable                      = $kong::params::service_enable,
@@ -136,7 +136,7 @@ class kong (
   validate_bool($nginx_daemon)
   validate_array($package_dependencies)
   validate_bool($package_manage)
-  validate_integer($postgres_port)
+  validate_integer($pg_port)
 
   $_proxy_listen_address = join(reverse(delete_at(reverse(split($proxy_listen, ':')), 0)), ':')
   $_proxy_listen_array   = split($proxy_listen, ':')

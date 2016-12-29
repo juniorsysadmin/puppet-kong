@@ -32,6 +32,16 @@ ssl_cert: "<%= @ssl_cert -%>"
 ssl_key_path: "<%= @ssl_cert_key -%>"
 <% end -%>
 
+database: "<%= @database -%>"
+
+<% if @database == 'postgres' -%>
+pg_host: "<%= @pg_host -%>"
+pg_port: <%= @pg_port %>
+pg_user: "<%= @pg_user -%>"
+pg_password: "<%= @pg_password -%>"
+pg_database: "<%= @pg_database -%>"
+<% end -%>
+
 cluster_listen: "<%= @cluster_listen -%>"
 
 cluster_listen_rpc: "<%= @cluster_listen_rpc -%>"
@@ -59,16 +69,6 @@ cluster:
 <% end -%>
 <% end -%>
 
-database: "<%= @database -%>"
-
-<% if @database == 'postgres' -%>
-postgres:
-  host: "<%= @postgres_host -%>"
-  port: <%= @postgres_port %>
-  user: "<%= @postgres_user -%>"
-  password: "<%= @postgres_password -%>"
-  database: "<%= @postgres_database -%>"
-<% end -%>
 <% if @database == 'cassandra' -%>
 cassandra:
   contact_points:
