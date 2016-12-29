@@ -16,9 +16,9 @@ proxy_listen_ssl: "<%= @proxy_listen_ssl -%>"
 
 admin_listen: "<%= @admin_listen -%>"
 
-nginx_worker_processes: @nginx_worker_processes
+nginx_worker_processes: <%= @nginx_worker_processes -%>
 
-nginx_daemon: @nginx_daemon
+nginx_daemon: <%= @nginx_daemon -%>
 
 mem_cache_size: <%= @mem_cache_size %>
 
