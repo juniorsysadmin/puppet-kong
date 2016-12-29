@@ -1,114 +1,111 @@
 # This file is managed by Puppet
 
-prefix: "<%= @kong_prefix -%>"
+prefix = <%= @kong_prefix -%>
 
-log_level: "<%= @log_level -%>"
+log_level = <%= @log_level -%>
 
 <% if ! @custom_plugins.empty? -%>
-custom_plugins: <%= @custom_plugins.join(',') %>
+custom_plugins = <%= @custom_plugins.join(',') %>
 <% end -%>
 
-anonymous_reports: <%= @anonymous_reports %>
+anonymous_reports = <%= @anonymous_reports %>
 
-proxy_listen: "<%= @proxy_listen -%>"
+proxy_listen = <%= @proxy_listen -%>
 
-proxy_listen_ssl: "<%= @proxy_listen_ssl -%>"
+proxy_listen_ssl = <%= @proxy_listen_ssl -%>
 
-admin_listen: "<%= @admin_listen -%>"
+admin_listen = <%= @admin_listen -%>
 
-nginx_worker_processes: <%= @nginx_worker_processes -%>
+nginx_worker_processes = <%= @nginx_worker_processes -%>
 
-nginx_daemon: <%= @nginx_daemon -%>
+nginx_daemon = <%= @nginx_daemon -%>
 
-mem_cache_size: <%= @mem_cache_size %>
+mem_cache_size = <%= @mem_cache_size %>
 
-ssl: <%= @ssl %>
+ssl = <%= @ssl %>
 
 <% if @ssl_cert -%>
-ssl_cert: "<%= @ssl_cert -%>"
+ssl_cert = <%= @ssl_cert -%>
 <% end -%>
 
 <% if @ssl_cert_key -%>
-ssl_key_path: "<%= @ssl_cert_key -%>"
+ssl_key_path = <%= @ssl_cert_key -%>
 <% end -%>
 
-database: "<%= @database -%>"
+database = <%= @database -%>
 
 <% if @database == 'postgres' -%>
-pg_host: "<%= @pg_host -%>"
-pg_port: <%= @pg_port %>
-pg_user: "<%= @pg_user -%>"
-pg_password: "<%= @pg_password -%>"
-pg_database: "<%= @pg_database -%>"
-pg_ssl: <%= @pg_ssl -%>
-pg_ssl_verify: <%= @pg_ssl_verify -%>
+pg_host = <%= @pg_host -%>
+pg_port = <%= @pg_port %>
+pg_user = <%= @pg_user -%>
+pg_password = <%= @pg_password -%>
+pg_database = <%= @pg_database -%>
+pg_ssl = <%= @pg_ssl -%>
+pg_ssl_verify = <%= @pg_ssl_verify -%>
 <% end -%>
 
 <% if @database == 'cassandra' -%>
-cassandra_contact_points: <%= @cassandra_contact_points.join(',') %>
-cassandra_port: <%= @cassandra_port %>
-cassandra_keyspace: "<%= @cassandra_keyspace %>"
-cassandra_consistency: "<%= @cassandra_consistency %>"
-cassandra_timeout: <%= @cassandra_timeout %>
-cassandra_ssl: <%= @cassandra_ssl %>
-cassandra_ssl_verify:  <%= @cassandra_ssl_verify %>
+cassandra_contact_points = <%= @cassandra_contact_points.join(',') %>
+cassandra_port = <%= @cassandra_port %>
+cassandra_keyspace = <%= @cassandra_keyspace %>
+cassandra_consistency = <%= @cassandra_consistency %>
+cassandra_timeout = <%= @cassandra_timeout %>
+cassandra_ssl = <%= @cassandra_ssl %>
+cassandra_ssl_verify =  <%= @cassandra_ssl_verify %>
   <% if @cassandra_user -%>
-cassandra_username: "<%= @cassandra_username %>"
+cassandra_username = <%= @cassandra_username %>
   <% end -%>
   <% if @cassandra_password -%>
-cassandra_password: "<%= @cassandra_password %>"
+cassandra_password = <%= @cassandra_password %>
   <% end -%>
-cassandra_repl_strategy: "<%= @cassandra_repl_strategy %>"
+cassandra_repl_strategy = <%= @cassandra_repl_strategy %>
   <% if @cassandra_repl_strategy == 'SimpleStrategy' -%>
-cassandra_repl_factor: <%= @cassandra_repl_factor %>
+cassandra_repl_factor = <%= @cassandra_repl_factor %>
   <% end -%>
   <% if @cassandra_repl_strategy == 'NetworkTopologyStrategy' -%>
     <% if ! @cassandra_data_centers.empty? -%>
-cassandra_data_centers: <%= @cassandra_data_centers.join(',') %>
+cassandra_data_centers = <%= @cassandra_data_centers.join(',') %>
     <% end -%>
   <% end -%>
 <% end -%>
 
-cluster_listen: "<%= @cluster_listen -%>"
+cluster_listen = <%= @cluster_listen -%>
 
-cluster_listen_rpc: "<%= @cluster_listen_rpc -%>"
+cluster_listen_rpc = <%= @cluster_listen_rpc -%>
 
 <% if @cluster_advertise -%>
-cluster_advertise: "<%= @cluster_advertise %>"
+cluster_advertise = <%= @cluster_advertise %>
 <% end -%>
 
 <% if @cluster_encrypt_key -%>
-cluster_encrypt_key: "<%= @cluster_encrypt_key %>"
+cluster_encrypt_key = <%= @cluster_encrypt_key %>
 <% end -%>
 
-cluster_ttl_on_failure: <%= @cluster_ttl_on_failure %>
+cluster_ttl_on_failure = <%= @cluster_ttl_on_failure %>
 
-cluster_profile: <%= @cluster_profile %>
+cluster_profile = <%= @cluster_profile %>
 
-dnsmasq: "<%= @dnsmasq -%>"
+dnsmasq = <%= @dnsmasq -%>
 <% if @dnsmasq -%>
-dnsmasq_port: "<%= @dnsmasq_port -%>"
+dnsmasq_port = <%= @dnsmasq_port -%>
 <% end -%>
 
 <% if ! @dnsmasq -%>
-dns_resolver: "<%= @dns_resolver -%>"
+dns_resolver = <%= @dns_resolver -%>
 <% end -%>
 
 <% if @cassandra_ssl_verify or @pg_ssl_verify -%>
-lua_ssl_trusted_certificate: "<%= @lua_ssl_trusted_certificate -%>"
+lua_ssl_trusted_certificate = <%= @lua_ssl_trusted_certificate -%>
 <% end -%>
 
-lua_ssl_verify_depth: <%= @lua_ssl_verify_depth -%>
+lua_ssl_verify_depth = <%= @lua_ssl_verify_depth -%>
 
-lua_code_cache: <%= @lua_code_cache -%>
+lua_code_cache = <%= @lua_code_cache -%>
 
 <% if @lua_package_path -%>
-lua_package_path: <%= @lua_package_path -%>
+lua_package_path = <%= @lua_package_path -%>
 <% end -%>
 
 <% if @lua_package_cpath -%>
-lua_package_cpath: <%= @lua_package_cpath -%>
+lua_package_cpath = <%= @lua_package_cpath -%>
 <% end -%>
-
-nginx: |
-<%= @nginx_conf -%>
