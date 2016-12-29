@@ -191,9 +191,17 @@ Which database to use. Options are ```cassandra``` or ```postgres```
 Defaults to ```cassandra```. Note that the database is not managed by this
 module.
 
+#### `dnsmasq`
+
+Defaults to ```true```
+
+#### `dnsmasq_port`
+
+Defaults to ```8053```
+
 #### `dns_resolver`
 
-Defaults to ```dnsmasq```
+Used if `dnsmasq` is set to ```false```. Default value is ```8.8.8.8```
 
 #### `dns_resolvers_available`
 

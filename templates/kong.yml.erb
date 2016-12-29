@@ -85,14 +85,13 @@ cluster_ttl_on_failure: <%= @cluster_ttl_on_failure %>
 
 cluster_profile: <%= @cluster_profile %>
 
-dns_resolver: "<%= @dns_resolver -%>"
-
-dns_resolvers_available:
-<% @dns_resolvers_available.each do |resolver, values| -%>
-  <%= resolver -%>:
-<% values.each do |k,v| -%>
-    <%= k %>: <%= v %>
+dnsmasq: "<%= @dnsmasq -%>"
+<% if @dnsmasq -%>
+dnsmasq_port: "<%= @dnsmasq_port -%>"
 <% end -%>
+
+<% if ! @dnsmasq -%>
+dns_resolver: "<%= @dns_resolver -%>"
 <% end -%>
 
 <% if @cassandra_ssl_verify or @pg_ssl_verify -%>

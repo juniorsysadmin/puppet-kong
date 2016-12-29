@@ -27,8 +27,9 @@ class kong::params {
   $config_file_template                = 'kong/kong.yml.erb'
   $custom_plugins                      = []
   $database                            = 'cassandra'
-  $dns_resolver                        = 'dnsmasq'
-  $dns_resolvers_available             = { dnsmasq => { port => 8053 }, }
+  $dnsmasq                             = true
+  $dnsmasq_port                        = 8053
+  $dns_resolver                        = '8.8.8.8'
   $kong_path                           = '/usr/local/bin/kong'
   $kong_prefix                         = '/usr/local/kong/'
   $log_level                           = 'notice'
