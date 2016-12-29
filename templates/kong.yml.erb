@@ -24,13 +24,13 @@ mem_cache_size: <%= @mem_cache_size %>
 
 ssl: <%= @ssl %>
 
+<% if @ssl_cert -%>
+ssl_cert: "<%= @ssl_cert -%>"
+<% end -%>
+
 cluster_listen: "<%= @cluster_listen -%>"
 
 cluster_listen_rpc: "<%= @cluster_listen_rpc -%>"
-
-<% if @ssl_cert_path -%>
-ssl_cert_path: "<%= @ssl_cert_path -%>"
-<% end -%>
 
 <% if @ssl_key_path -%>
 ssl_key_path: "<%= @ssl_key_path -%>"

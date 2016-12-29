@@ -290,7 +290,7 @@ Defaults to ```true```
 
 Defaults to ```true```
 
-#### `ssl_cert_path`
+#### `ssl_cert`
 
 Optional path to the SSL certificate that Kong will use when listening on the
 https port

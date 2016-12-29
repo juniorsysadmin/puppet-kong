@@ -50,7 +50,7 @@ class kong::params {
   $service_ensure                      = 'running'
   $service_manage                      = true
   $ssl                                 = true
-  $ssl_cert_path                       = undef
+  $ssl_cert                            = undef
   $ssl_key_path                        = undef
   $staging_dir                         = '/opt'
   $systemd_init_file_template          = 'kong/init/systemd/kong.service.erb'
