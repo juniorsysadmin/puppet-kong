@@ -37,6 +37,7 @@ class kong (
   $manage_init_file                    = $kong::params::manage_init_file,
   $memory_cache_size                   = $kong::params::memory_cache_size,
   $nginx_conf                          = $kong::params::nginx_conf,
+  $nginx_worker_processes              = $kong::params::nginx_worker_processes,
   $package_dependencies                = $kong::params::package_dependencies,
   $package_manage                      = $kong::params::package_manage,
   $package_provider                    = $kong::params::package_provider,

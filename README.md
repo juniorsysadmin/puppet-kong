@@ -229,6 +229,10 @@ Defaults to ```128```
 A nginx configuration template that is compiled using the Penlight templating
 engine, and then used by Kong.
 
+#### `nginx_worker_processes`
+
+Defaults to 'auto'
+
 #### `package_manage`
 
 Defaults to ```true```
