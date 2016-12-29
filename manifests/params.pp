@@ -43,6 +43,8 @@ class kong::params {
   $pg_host                             = '127.0.0.1'
   $pg_password                         = undef
   $pg_port                             = 5432
+  $pg_ssl                              = false
+  $pg_ssl_verify                       = false
   $pg_user                             = undef
   $proxy_listen                        = '0.0.0.0:8000'
   $proxy_listen_ssl                    = '0.0.0.0:8443'

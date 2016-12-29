@@ -47,6 +47,8 @@ class kong (
   $pg_host                             = $kong::params::pg_host,
   $pg_password                         = $kong::params::pg_password,
   $pg_port                             = $kong::params::pg_port,
+  $pg_ssl                              = $kong::params::pg_ssl,
+  $pg_ssl_verify                       = $kong::params::pg_ssl_verify,
   $pg_user                             = $kong::params::pg_user,
   $proxy_listen                        = $kong::params::proxy_listen,
   $proxy_listen_ssl                    = $kong::params::proxy_listen_ssl,
@@ -137,6 +139,8 @@ class kong (
   validate_array($package_dependencies)
   validate_bool($package_manage)
   validate_integer($pg_port)
+  validate_bool($pg_ssl)
+  validate_bool($pg_ssl_verify)
 
   $_proxy_listen_address = join(reverse(delete_at(reverse(split($proxy_listen, ':')), 0)), ':')
   $_proxy_listen_array   = split($proxy_listen, ':')

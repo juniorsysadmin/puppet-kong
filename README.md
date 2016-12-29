@@ -262,6 +262,14 @@ No default. Required if ```database``` is set to ```postgres```
 
 Defaults to ```5432```
 
+#### `pg_ssl`
+
+Defaults to ```false```
+
+#### `pg_ssl_verify`
+
+Defaults to ```false```
+
 #### `pg_user`
 
 No default. Required if ```database``` is set to ```postgres```
