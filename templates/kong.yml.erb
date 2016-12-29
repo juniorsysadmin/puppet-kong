@@ -95,7 +95,19 @@ dns_resolver: "<%= @dns_resolver -%>"
 <% end -%>
 
 <% if @cassandra_ssl_verify or @pg_ssl_verify -%>
-lua_ssl_trusted_certificate: "<% @lua_ssl_trusted_certificate %>"
+lua_ssl_trusted_certificate: "<%= @lua_ssl_trusted_certificate -%>"
+<% end -%>
+
+lua_ssl_verify_depth: <%= @lua_ssl_verify_depth -%>
+
+lua_code_cache: <%= @lua_code_cache -%>
+
+<% if @lua_package_path -%>
+lua_package_path: <%= @lua_package_path -%>
+<% end -%>
+
+<% if @lua_package_cpath -%>
+lua_package_cpath: <%= @lua_package_cpath -%>
 <% end -%>
 
 nginx: |

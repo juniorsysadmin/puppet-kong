@@ -33,7 +33,11 @@ class kong::params {
   $kong_path                           = '/usr/local/bin/kong'
   $kong_prefix                         = '/usr/local/kong/'
   $log_level                           = 'notice'
+  $lua_package_cpath                   = undef
+  $lua_package_path                    = undef
+  $lua_code_cache                      = true
   $lua_ssl_trusted_certificate         = undef
+  $lua_ssl_verify_depth                = 1
   $manage_init_file                    = true
   $manage_package_dependencies         = true
   $manage_package_fetch                = true

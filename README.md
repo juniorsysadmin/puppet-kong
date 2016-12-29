@@ -219,10 +219,26 @@ Defaults to ```/usr/local/kong/```
 
 Defaults to ```notice```
 
+#### `lua_code_cache`
+
+Defaults to `true`
+
+#### `lua_package_cpath`
+
+(Optional) Sets the Lua C module search path
+
+#### `lua_package_path`
+
+(Optional) Sets the Lua module search path
+
 #### `lua_ssl_trusted_certificate`
 
 Absolute path to the trusted CA certificate in PEM format when ```cassandra_ssl_verify```
 or ```pg_ssl_verify``` is set to ```true```
+
+#### `lua_ssl_verify_depth`
+
+Defaults to `1`
 
 #### `manage_init_file`
 
