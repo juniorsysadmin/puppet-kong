@@ -295,7 +295,7 @@ Defaults to ```true```
 Optional path to the SSL certificate that Kong will use when listening on the
 https port
 
-#### `ssl_key_path`
+#### `ssl_cert_key`
 
 Optional path to the SSL certificate key that Kong will use when listening on
 the https port

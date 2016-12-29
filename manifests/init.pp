@@ -55,7 +55,7 @@ class kong (
   $service_manage                      = $kong::params::service_manage,
   $ssl                                 = $kong::params::ssl,
   $ssl_cert                            = $kong::params::ssl_cert,
-  $ssl_key_path                        = $kong::params::ssl_key_path,
+  $ssl_cert_key                        = $kong::params::ssl_cert_key,
   $staging_dir                         = $kong::params::staging_dir,
   $systemd_init_file_template          = $kong::params::systemd_init_file_template,
   $sysv_init_file_template             = $kong::params::sysv_init_file_template,
@@ -164,8 +164,8 @@ class kong (
     validate_absolute_path($ssl_cert)
   }
 
-  if $ssl_key_path {
-    validate_absolute_path($ssl_key_path)
+  if $ssl_cert_key {
+    validate_absolute_path($ssl_cert_key)
   }
 
   if $nginx_conf {
