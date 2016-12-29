@@ -82,6 +82,10 @@ right thing based on the ```version``` parameter.
 
 Defaults to ```0.0.0.0:8001```
 
+#### `anonymous_reports`
+
+Defaults to ```true```
+
 #### `base_url`
 
 Defaults to ```https://downloadkong.org```
@@ -261,10 +265,6 @@ Defaults to ```0.0.0.0:8000```
 #### `proxy_listen_ssl`
 
 Defaults to ```0.0.0.0:8443```
-
-#### `send_anonymous_reports`
-
-Defaults to ```true```
 
 #### `service_enable`
 

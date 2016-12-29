@@ -1,11 +1,14 @@
 # This file is managed by Puppet
-<% if ! @custom_plugins.empty? -%>
-custom_plugins: <%= @custom_plugins.join(',') %>
-<% end -%>
 
 prefix: "<%= @kong_prefix -%>"
 
 log_level: "<%= @log_level -%>"
+
+<% if ! @custom_plugins.empty? -%>
+custom_plugins: <%= @custom_plugins.join(',') %>
+<% end -%>
+
+anonymous_reports: <%= @anonymous_reports %>
 
 proxy_listen: "<%= @proxy_listen -%>"
 
@@ -92,8 +95,6 @@ cassandra:
   password: "<%= @cassandra_password %>"
 <% end -%>
 <% end -%>
-
-send_anonymous_reports: <%= @send_anonymous_reports %>
 
 memory_cache_size: <%= @memory_cache_size %>
 

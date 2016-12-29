@@ -1,6 +1,7 @@
 # == Class: kong: See README.md for documentation.
 class kong (
   $admin_api_listen                    = $kong::params::admin_api_listen,
+  $anonymous_reports                   = $kong::params::anonymous_reports,
   $base_url                            = $kong::params::base_url,
   $cassandra_consistency               = $kong::params::cassandra_consistency,
   $cassandra_contact_points            = $kong::params::cassandra_contact_points,
@@ -47,7 +48,6 @@ class kong (
   $postgres_user                       = $kong::params::postgres_user,
   $proxy_listen                        = $kong::params::proxy_listen,
   $proxy_listen_ssl                    = $kong::params::proxy_listen_ssl,
-  $send_anonymous_reports              = $kong::params::send_anonymous_reports,
   $service_enable                      = $kong::params::service_enable,
   $service_ensure                      = $kong::params::service_ensure,
   $service_manage                      = $kong::params::service_manage,
@@ -70,6 +70,7 @@ class kong (
     fail("${module_name}: ${admin_api_listen} does not contain a valid IP address.")
   }
   validate_integer($_admin_api_listen_port)
+  validate_bool($anonymous_reports)
   validate_re($cassandra_consistency, '^(ALL|EACH_QUORUM|QUORUM|LOCAL_QUORUM|ONE|TWO|THREE|LOCAL_ONE|ANY)$')
   validate_array($cassandra_contact_points)
   validate_array($cassandra_data_centers)
@@ -151,7 +152,6 @@ class kong (
   }
 
   validate_integer($_proxy_listen_ssl_port)
-  validate_bool($send_anonymous_reports)
   validate_bool($service_enable)
   validate_bool($service_manage)
 

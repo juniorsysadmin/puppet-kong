@@ -1,5 +1,6 @@
 class kong::params {
   $admin_api_listen                    = '0.0.0.0:8001'
+  $anonymous_reports                   = true
   $base_url                            = 'https://downloadkong.org'
   $cassandra_consistency               = 'ONE'
   $cassandra_contact_points            = [ '127.0.0.1:9042' ]
@@ -43,7 +44,6 @@ class kong::params {
   $postgres_user                       = undef
   $proxy_listen                        = '0.0.0.0:8000'
   $proxy_listen_ssl                    = '0.0.0.0:8443'
-  $send_anonymous_reports              = true
   $service_enable                      = true
   $service_ensure                      = 'running'
   $service_manage                      = true
