@@ -1,9 +1,6 @@
 # This file is managed by Puppet
 <% if ! @custom_plugins.empty? -%>
-custom_plugins:
-<% @custom_plugins.each do |plugin| -%>
-  - "<%= plugin %>"
-<% end -%>
+custom_plugins: <%= @custom_plugins.join(',') %>
 <% end -%>
 
 prefix: "<%= @kong_prefix -%>"
