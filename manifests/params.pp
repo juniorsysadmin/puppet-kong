@@ -15,10 +15,11 @@ class kong::params {
   $cassandra_timeout                   = 5000
   $cassandra_username                  = undef
   $cluster_advertise                   = undef
-  $cluster_encrypt                     = undef
+  $cluster_encrypt_key                 = undef
   $cluster_listen                      = '0.0.0.0:7946'
   $cluster_listen_rpc                  = '127.0.0.1:7373'
-  $cluster_ttl_on_failure              = undef
+  $cluster_profile                     = 'wan'
+  $cluster_ttl_on_failure              = 3600
   $config_file_group                   = '0'
   $config_file_mode                    = '0644'
   $config_file_owner                   = 'root'

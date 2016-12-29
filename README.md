@@ -145,7 +145,7 @@ Optional
 Optional address:port used by the node to communicate with other Kong
 nodes in the cluster.
 
-#### `cluster_encrypt`
+#### `cluster_encrypt_key`
 
 Optional key for encrypting network traffic within Kong.
 
@@ -157,9 +157,13 @@ Defaults to ```0.0.0.0:7946```
 
 Defaults to ```127.0.0.1:7373```
 
+#### `cluster_profile`
+
+Defaults to ```wan```
+
 #### `cluster_ttl_on_failure`
 
-Optional override of Kong default (3600)
+Defaults to ```3600```
 
 #### `config_file_group`
 

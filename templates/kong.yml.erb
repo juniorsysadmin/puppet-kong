@@ -73,6 +73,18 @@ cluster_listen: "<%= @cluster_listen -%>"
 
 cluster_listen_rpc: "<%= @cluster_listen_rpc -%>"
 
+<% if @cluster_advertise -%>
+cluster_advertise: "<%= @cluster_advertise %>"
+<% end -%>
+
+<% if @cluster_encrypt_key -%>
+cluster_encrypt_key: "<%= @cluster_encrypt_key %>"
+<% end -%>
+
+cluster_ttl_on_failure: <%= @cluster_ttl_on_failure %>
+
+cluster_profile: <%= @cluster_profile %>
+
 dns_resolver: "<%= @dns_resolver -%>"
 
 dns_resolvers_available:
@@ -80,19 +92,6 @@ dns_resolvers_available:
   <%= resolver -%>:
 <% values.each do |k,v| -%>
     <%= k %>: <%= v %>
-<% end -%>
-<% end -%>
-
-<% if @cluster_advertise || @cluster_encrypt || @cluster_ttl_on_failure -%>
-cluster:
-<% if @cluster_advertise -%>
-  advertise: "<%= @cluster_advertise %>"
-<% end -%>
-<% if @cluster_encrypt -%>
-  encrypt: "<%= @cluster_encrypt %>"
-<% end -%>
-<% if @cluster_ttl_on_failure -%>
-  ttl_on_failure: <%= @cluster_ttl_on_failure %>
 <% end -%>
 <% end -%>
 
