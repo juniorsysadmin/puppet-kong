@@ -164,6 +164,10 @@ class kong (
     validate_absolute_path($ssl_key_path)
   }
 
+  if $nginx_conf {
+    validate_absolute_path($nginx_conf)
+  }
+
   validate_bool($use_staging)
 
   contain ::kong::install
