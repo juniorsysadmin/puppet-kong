@@ -20,6 +20,8 @@ nginx_worker_processes: @nginx_worker_processes
 
 nginx_daemon: @nginx_daemon
 
+mem_cache_size: <%= @mem_cache_size %>
+
 cluster_listen: "<%= @cluster_listen -%>"
 
 cluster_listen_rpc: "<%= @cluster_listen_rpc -%>"
@@ -99,8 +101,6 @@ cassandra:
   password: "<%= @cassandra_password %>"
 <% end -%>
 <% end -%>
-
-memory_cache_size: <%= @memory_cache_size %>
 
 nginx: |
 <%= @nginx_conf -%>

@@ -220,9 +220,9 @@ Defaults to ```true```
 
 Defaults to ```true```
 
-#### `memory_cache_size`
+#### `mem_cache_size`
 
-Defaults to ```128```
+Defaults to ```128m```
 
 #### `nginx_conf`
 
@@ -231,11 +231,11 @@ engine, and then used by Kong.
 
 #### `nginx_daemon`
 
-Defaults to true
+Defaults to ```true```
 
 #### `nginx_worker_processes`
 
-Defaults to 'auto'
+Defaults to ```auto```
 
 #### `package_manage`
 

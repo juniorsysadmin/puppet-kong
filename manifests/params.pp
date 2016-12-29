@@ -34,7 +34,7 @@ class kong::params {
   $manage_init_file                    = true
   $manage_package_dependencies         = true
   $manage_package_fetch                = true
-  $memory_cache_size                   = 128
+  $mem_cache_size                      = '128m'
   $nginx_conf                          = undef
   $nginx_daemon                        = true
   $nginx_worker_processes              = 'auto'
