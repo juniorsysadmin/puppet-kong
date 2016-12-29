@@ -96,7 +96,7 @@ Defaults to ```ONE```
 
 #### `cassandra_contact_points`
 
-Defaults to single contact point ```[ '127.0.0.1:9042' ]```
+Defaults to single contact point ```[ '127.0.0.1' ]```
 
 #### `cassandra_data_centers`
 
@@ -111,21 +111,20 @@ Defaults to ```kong```
 
 Optional
 
-#### `cassandra_replication_factor`
+#### `cassandra_port`
+
+Defaults to 9042
+
+#### `cassandra_repl_factor`
 
 Used only when the replication strategy is set to ```SimpleStrategy```.
 Defaults to ```1```
 
-#### `cassandra_replication_strategy`
+#### `cassandra_repl_strategy`
 
 Defaults to ```SimpleStrategy```
 
-#### `cassandra_ssl_certificate_authority`
-
-Absolute path to the trusted CA certificate in PEM format when ```cassandra_ssl_verify```
-is set to ```true```
-
-#### `cassandra_ssl_enabled`
+#### `cassandra_ssl`
 
 Defaults to ```false```
 
@@ -133,13 +132,13 @@ Defaults to ```false```
 
 Defaults to ```false```
 
-#### `cassandra_user`
-
-Optional
-
 #### `cassandra_timeout`
 
 Connection and reading timeout (in ms). Defaults to 5000.
+
+#### `cassandra_username`
+
+Optional
 
 #### `cluster_advertise`
 
@@ -207,6 +206,11 @@ Defaults to ```/usr/local/kong/```
 #### `log_level`
 
 Defaults to ```notice```
+
+#### `lua_ssl_trusted_certificate`
+
+Absolute path to the trusted CA certificate in PEM format when ```cassandra_ssl_verify```
+or ```pg_ssl_verify``` is set to ```true```
 
 #### `manage_init_file`
 

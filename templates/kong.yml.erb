@@ -44,6 +44,31 @@ pg_ssl: <%= @pg_ssl -%>
 pg_ssl_verify: <%= @pg_ssl_verify -%>
 <% end -%>
 
+<% if @database == 'cassandra' -%>
+cassandra_contact_points: <%= @cassandra_contact_points.join(',') %>
+cassandra_port: <%= @cassandra_port %>
+cassandra_keyspace: "<%= @cassandra_keyspace %>"
+cassandra_consistency: "<%= @cassandra_consistency %>"
+cassandra_timeout: <%= @cassandra_timeout %>
+cassandra_ssl: <%= @cassandra_ssl %>
+cassandra_ssl_verify:  <%= @cassandra_ssl_verify %>
+  <% if @cassandra_user -%>
+cassandra_username: "<%= @cassandra_username %>"
+  <% end -%>
+  <% if @cassandra_password -%>
+cassandra_password: "<%= @cassandra_password %>"
+  <% end -%>
+cassandra_repl_strategy: "<%= @cassandra_repl_strategy %>"
+  <% if @cassandra_repl_strategy == 'SimpleStrategy' -%>
+cassandra_repl_factor: <%= @cassandra_repl_factor %>
+  <% end -%>
+  <% if @cassandra_repl_strategy == 'NetworkTopologyStrategy' -%>
+    <% if ! @cassandra_data_centers.empty? -%>
+cassandra_data_centers: <%= @cassandra_data_centers.join(',') %>
+    <% end -%>
+  <% end -%>
+<% end -%>
+
 cluster_listen: "<%= @cluster_listen -%>"
 
 cluster_listen_rpc: "<%= @cluster_listen_rpc -%>"
@@ -71,39 +96,8 @@ cluster:
 <% end -%>
 <% end -%>
 
-<% if @database == 'cassandra' -%>
-cassandra:
-  contact_points:
-<% @cassandra_contact_points.each do |contact_point| -%>
-    - "<%= contact_point %>"
-<% end -%>
-  keyspace: "<%= @cassandra_keyspace %>"
-  timeout: <%= @cassandra_timeout %>
-  replication_strategy: "<%= @cassandra_replication_strategy %>"
-<% if @cassandra_replication_strategy == 'SimpleStrategy' -%>
-  replication_factor: <%= @cassandra_replication_factor %>
-<% end -%>
-<% if @cassandra_replication_strategy == 'NetworkTopologyStrategy' -%>
-<% if ! @cassandra_data_centers.empty? -%>
-  data_centers:
-  <% @cassandra_data_centers.each do |data_center| -%>
-    - "<%= data_center %>"
-  <% end -%>
-<% end -%>
-<% end -%>
-  consistency: "<%= @cassandra_consistency %>"
-  ssl:
-    enabled: <%= @cassandra_ssl_enabled %>
-    verify:  <%= @cassandra_ssl_verify %>
-<% if @cassandra_ssl_verify -%>
-    certificate_authority: "<% @cassandra_ssl_certificate_authority %>"
-<% end -%>
-<% if @cassandra_user -%>
-  user: "<%= @cassandra_user %>"
-<% end -%>
-<% if @cassandra_password -%>
-  password: "<%= @cassandra_password %>"
-<% end -%>
+<% if @cassandra_ssl_verify or @pg_ssl_verify -%>
+lua_ssl_trusted_certificate: "<% @lua_ssl_trusted_certificate %>"
 <% end -%>
 
 nginx: |

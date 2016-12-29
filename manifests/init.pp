@@ -8,13 +8,13 @@ class kong (
   $cassandra_data_centers              = $kong::params::cassandra_data_centers,
   $cassandra_keyspace                  = $kong::params::cassandra_keyspace,
   $cassandra_password                  = $kong::params::cassandra_password,
-  $cassandra_replication_factor        = $kong::params::cassandra_replication_factor,
-  $cassandra_replication_strategy      = $kong::params::cassandra_replication_strategy,
-  $cassandra_ssl_certificate_authority = $kong::params::cassandra_ssl_certificate_authority,
-  $cassandra_ssl_enabled               = $kong::params::cassandra_ssl_enabled,
+  $cassandra_port                      = $kong::params::cassandra_port,
+  $cassandra_repl_factor               = $kong::params::cassandra_repl_factor,
+  $cassandra_repl_strategy             = $kong::params::cassandra_repl_strategy,
+  $cassandra_ssl                       = $kong::params::cassandra_ssl,
   $cassandra_ssl_verify                = $kong::params::cassandra_ssl_verify,
   $cassandra_timeout                   = $kong::params::cassandra_timeout,
-  $cassandra_user                      = $kong::params::cassandra_user,
+  $cassandra_username                  = $kong::params::cassandra_username,
   $cluster_advertise                   = $kong::params::cluster_advertise,
   $cluster_encrypt                     = $kong::params::cluster_encrypt,
   $cluster_listen                      = $kong::params::cluster_listen,
@@ -32,6 +32,7 @@ class kong (
   $kong_path                           = $kong::params::kong_path,
   $kong_prefix                         = $kong::params::kong_prefix,
   $log_level                           = $kong::params::log_level,
+  $lua_ssl_trusted_certificate         = $kong::params::lua_ssl_trusted_certificate,
   $manage_package_dependencies         = $kong::params::manage_package_dependencies,
   $manage_package_fetch                = $kong::params::manage_package_fetch,
   $manage_init_file                    = $kong::params::manage_init_file,
@@ -80,14 +81,10 @@ class kong (
   validate_array($cassandra_contact_points)
   validate_array($cassandra_data_centers)
   validate_string($cassandra_keyspace)
-  validate_integer($cassandra_replication_factor)
-  validate_re($cassandra_replication_strategy, '^(SimpleStrategy|NetworkTopologyStrategy)$')
+  validate_integer($cassandra_repl_factor)
+  validate_re($cassandra_repl_strategy, '^(SimpleStrategy|NetworkTopologyStrategy)$')
 
-  if $cassandra_ssl_certificate_authority {
-    validate_absolute_path($cassandra_ssl_certificate_authority)
-  }
-
-  validate_bool($cassandra_ssl_enabled)
+  validate_bool($cassandra_ssl)
   validate_bool($cassandra_ssl_verify)
   validate_integer($cassandra_timeout)
 
@@ -170,6 +167,10 @@ class kong (
 
   if $ssl_cert_key {
     validate_absolute_path($ssl_cert_key)
+  }
+
+  if $lua_ssl_trusted_certificate {
+    validate_absolute_path($lua_ssl_trusted_certificate)
   }
 
   if $nginx_conf {
