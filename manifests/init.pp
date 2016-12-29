@@ -53,6 +53,7 @@ class kong (
   $service_enable                      = $kong::params::service_enable,
   $service_ensure                      = $kong::params::service_ensure,
   $service_manage                      = $kong::params::service_manage,
+  $ssl                                 = $kong::params::ssl,
   $ssl_cert_path                       = $kong::params::ssl_cert_path,
   $ssl_key_path                        = $kong::params::ssl_key_path,
   $staging_dir                         = $kong::params::staging_dir,
@@ -157,6 +158,7 @@ class kong (
   validate_integer($_proxy_listen_ssl_port)
   validate_bool($service_enable)
   validate_bool($service_manage)
+  validate_bool($ssl)
 
   if $ssl_cert_path {
     validate_absolute_path($ssl_cert_path)

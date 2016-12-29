@@ -286,6 +286,10 @@ Defaults to ```running```
 
 Defaults to ```true```
 
+#### `ssl`
+
+Defaults to ```true```
+
 #### `ssl_cert_path`
 
 Optional path to the SSL certificate that Kong will use when listening on the
