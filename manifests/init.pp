@@ -37,6 +37,7 @@ class kong (
   $manage_init_file                    = $kong::params::manage_init_file,
   $memory_cache_size                   = $kong::params::memory_cache_size,
   $nginx_conf                          = $kong::params::nginx_conf,
+  $nginx_daemon                        = $kong::params::nginx_daemon,
   $nginx_worker_processes              = $kong::params::nginx_worker_processes,
   $package_dependencies                = $kong::params::package_dependencies,
   $package_manage                      = $kong::params::package_manage,
@@ -131,6 +132,7 @@ class kong (
   validate_bool($manage_package_dependencies)
   validate_bool($manage_package_fetch)
   validate_integer($memory_cache_size)
+  validate_bool($nginx_daemon)
   validate_array($package_dependencies)
   validate_bool($package_manage)
   validate_integer($postgres_port)
