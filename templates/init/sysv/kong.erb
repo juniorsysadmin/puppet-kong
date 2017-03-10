@@ -37,14 +37,14 @@ case "$1" in
         cd "$dir"
         if [ -z "$user" ]; then
 <%- if !@nginx_conf.nil? -%>
-            sudo $cmd --conf @config_file_path --nginx-conf @nginx_conf >> "$stdout_log" 2>> "$stderr_log" &
+            sudo $cmd --conf <%= @config_file_path -%> --nginx-conf <%= @nginx_conf -%> >> "$stdout_log" 2>> "$stderr_log" &
         else
-            sudo -u "$user" $cmd --conf @config_file_path --nginx-conf @nginx_conf >> "$stdout_log" 2>> "$stderr_log" &
+            sudo -u "$user" $cmd --conf <%= @config_file_path -%> --nginx-conf <%= @nginx_conf -%> >> "$stdout_log" 2>> "$stderr_log" &
         fi
 <% else -%>
-            sudo $cmd --conf @config_file_path >> "$stdout_log" 2>> "$stderr_log" &
+            sudo $cmd --conf <%= @config_file_path -%> >> "$stdout_log" 2>> "$stderr_log" &
         else
-            sudo -u "$user" $cmd --conf @config_file_path >> "$stdout_log" 2>> "$stderr_log" &
+            sudo -u "$user" $cmd --conf <%= @config_file_path -%> >> "$stdout_log" 2>> "$stderr_log" &
         fi
 <%- end -%>
         echo $! > "$pid_file"
