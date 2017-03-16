@@ -130,7 +130,6 @@ class kong (
   validate_array($custom_plugins)
   validate_re($database, '^(cassandra|postgres)$', "${module_name}: Database must be cassandra or postgres.")
   validate_string($dns_resolver)
-  validate_hash($dns_resolvers_available)
   validate_absolute_path($kong_path)
   validate_absolute_path($kong_prefix)
   validate_string($log_level)
