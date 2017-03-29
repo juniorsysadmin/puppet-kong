@@ -4,11 +4,11 @@ Description=Kong daemon
 
 [Service]
 <%- if !@nginx_conf.nil? -%>
-ExecStart=<%= @kong_path -%> start --conf @config_file_path --nginx-conf @nginx_conf
-ExecReload=<% @kong_path -%> reload --conf @config_file_path --nginx-conf @nginx_conf
+ExecStart=<%= @kong_path -%> start --conf <%= @config_file_path -%> --nginx-conf <%= @nginx_conf %>
+ExecReload=<%= @kong_path -%> reload --conf <%= @config_file_path -%> --nginx-conf <%= @nginx_conf %>
 <% else -%>
-ExecStart=<%= @kong_path -%> start --conf @config_file_path
-ExecReload=<% @kong_path -%> reload --conf @config_file_path --nginx-conf
+ExecStart=<%= @kong_path -%> start --conf <%= @config_file_path %>
+ExecReload=<%= @kong_path -%> reload --conf <%= @config_file_path %>
 <%- end -%>
-ExecStop<%= @kong_path -%> stop
+ExecStop=<%= @kong_path -%> stop
 Restart=on-failure
