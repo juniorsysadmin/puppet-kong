@@ -35,13 +35,13 @@ ssl_key_path = <%= @ssl_cert_key -%>
 database = <%= @database -%>
 
 <% if @database == 'postgres' -%>
-pg_host = <%= @pg_host -%>
+pg_host = <%= @pg_host %>
 pg_port = <%= @pg_port %>
-pg_user = <%= @pg_user -%>
-pg_password = <%= @pg_password -%>
-pg_database = <%= @pg_database -%>
-pg_ssl = <%= @pg_ssl -%>
-pg_ssl_verify = <%= @pg_ssl_verify -%>
+pg_user = <%= @pg_user %>
+pg_password = <%= @pg_password %>
+pg_database = <%= @pg_database %>
+pg_ssl = <%= @pg_ssl %>
+pg_ssl_verify = <%= @pg_ssl_verify %>
 <% end -%>
 
 <% if @database == 'cassandra' -%>
@@ -85,9 +85,9 @@ cluster_ttl_on_failure = <%= @cluster_ttl_on_failure %>
 
 cluster_profile = <%= @cluster_profile %>
 
-dnsmasq = <%= @dnsmasq -%>
+dnsmasq = <%= @dnsmasq %>
 <% if @dnsmasq -%>
-dnsmasq_port = <%= @dnsmasq_port -%>
+dnsmasq_port = <%= @dnsmasq_port %>
 <% end -%>
 
 <% if ! @dnsmasq -%>
