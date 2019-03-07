@@ -4,6 +4,6 @@ Description=Kong daemon
 
 [Service]
 ExecStart=<%= @kong_path -%> start
-ExecReload=<% @kong_path -%> reload
-ExecStop<%= @kong_path -%> stop
+ExecReload=<%= @kong_path -%> reload
+ExecStop=<%= @kong_path -%> stop
 Restart=on-failure
